@@ -1,0 +1,26 @@
+.myshelf-item {
+  display: flex;
+  padding: 2rem;
+  margin: 2rem 0;
+  border: 1px solid #555;
+  border-radius: 1rem;
+}
+
+.myshelf-item-img {
+  width: 6rem;
+  height: 9rem;
+}
+
+.myshelf-item-content-container {
+  padding-left: 2rem;
+  padding-top: 0px;
+}
+
+.myshelf-item-content-container p {
+  padding-top: 3.5px;
+}
+
+.myshelf-item-status {
+  padding-top: 0.5rem;
+  color: var(--primary-color-bright);
+}
