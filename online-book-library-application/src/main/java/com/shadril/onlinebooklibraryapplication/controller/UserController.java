@@ -5,6 +5,7 @@ import com.shadril.onlinebooklibraryapplication.dto.UserDTO;
 import com.shadril.onlinebooklibraryapplication.dto.UserLoginRequestModelDTO;
 import com.shadril.onlinebooklibraryapplication.entity.Book;
 import com.shadril.onlinebooklibraryapplication.entity.BorrowBook;
+import com.shadril.onlinebooklibraryapplication.entity.User;
 import com.shadril.onlinebooklibraryapplication.exception.UserNotFoundException;
 import com.shadril.onlinebooklibraryapplication.service.BookService;
 import com.shadril.onlinebooklibraryapplication.service.UserService;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+
 public class UserController {
     @Autowired
     private UserService userService;
@@ -66,6 +68,7 @@ public class UserController {
             Map<String, Object> loginResponse = new HashMap<>();
             loginResponse.put("userId", userDto.getId());
             loginResponse.put("email", userDto.getEmail());
+            loginResponse.put("role", userDto.getRole());
             loginResponse.put(AppConstants.HEADER_STRING, AppConstants.TOKEN_PREFIX + accessToken);
             return ResponseEntity.status(HttpStatus.OK).body(loginResponse);
 
@@ -96,5 +99,12 @@ public class UserController {
     public ResponseEntity<List<BorrowBook>> borrowingHistory(@PathVariable Long userId)
             throws UserNotFoundException{
         return new ResponseEntity<>(bookService.borrowHistory(userId), HttpStatus.OK);
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<?> getCurrentUser()
+            throws UserNotFoundException {
+        UserDTO user = userService.getCurrUser();
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }
