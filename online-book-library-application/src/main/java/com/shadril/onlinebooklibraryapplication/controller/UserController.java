@@ -35,6 +35,11 @@ public class UserController {
     @Autowired
     private BookService bookService;
 
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> userList = userService.getAllUsers();
+        return new ResponseEntity<>(userList, HttpStatus.OK);
+    }
     @GetMapping("/users/{userId}")
     public ResponseEntity<?> userDetailsByUserId(@PathVariable Long userId) {
         try {
@@ -107,4 +112,16 @@ public class UserController {
         UserDTO user = userService.getCurrUser();
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
+    @PostMapping("/user/update/{userId}")
+    public ResponseEntity<?> updateUser(@PathVariable Long userId, @RequestBody UserDTO userDto)
+            throws UserNotFoundException {
+        try {
+            UserDTO updatedUser = userService.updateUser(userId, userDto);
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

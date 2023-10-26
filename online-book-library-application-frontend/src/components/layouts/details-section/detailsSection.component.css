@@ -40,3 +40,62 @@
   padding-top: 1rem;
   color: var(--primary-color-bright);
 }
+
+.book-detail-container .button-container {
+  /* margin-top: 2rem; */
+  /* margin-bottom: 2rem; */
+}
+
+.reviews-container {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  padding-left: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 2rem;
+}
+
+.reviews-container-header {
+  margin-left: 10rem;
+  font-size: 2.5rem;
+}
+
+.reviews-container-user {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5rem;
+  margin-right: 2rem;
+  font-size: 1.5rem;
+  color: blue;
+}
+
+.reviews-container-review {
+  /* margin-top: 1rem; */
+  margin-left: 5rem;
+  margin-right: 5rem;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.button-shelf {
+  margin-top: 2rem;
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--primary-color-bright);
+  color: var(--white-color);
+  text-decoration: none;
+  /* font-weight: 100; */
+  margin-top: 0.5rem;
+  box-shadow: 2px 2px 5px #ddd;
+  transition: 0.2s ease-in;
+  border-radius: 3.5px;
+  border: none;
+  font-family: Chivo Mono;
+  font-size: 1rem;
+}
+
+.button-shelf:hover {
+  background-color: #222;
+}

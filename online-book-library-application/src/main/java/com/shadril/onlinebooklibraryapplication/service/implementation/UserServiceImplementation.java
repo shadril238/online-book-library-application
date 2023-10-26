@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -100,5 +101,28 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.map(user, UserDTO.class);
         return modelMapper.map(user, UserDTO.class);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        List<User> userList = userRepository.findAll();
+        if(userList.isEmpty()) throw new UserNotFoundException("No users found!");
+        return userList;
+    }
+
+    @Override
+    public UserDTO updateUser(Long userId, UserDTO userDto) {
+        Optional<User> userEntity = userRepository.findById(userId);
+        if (userEntity.isEmpty()) throw new UserNotFoundException("User Id does not exists!");
+        userEntity.get().setFirstName(userDto.getFirstName());
+        userEntity.get().setLastName(userDto.getLastName());
+        userEntity.get().setAddress(userDto.getAddress());
+//        userEntity.get().setEmail(userDto.getEmail());
+//        userEntity.get().setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        userEntity.get().setRole(userDto.getRole());
+        User updatedUserDetails = userRepository.save(userEntity.get());
+        UserDTO returnValue = new UserDTO();
+        BeanUtils.copyProperties(updatedUserDetails,returnValue);
+        return returnValue;
     }
 }

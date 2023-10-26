@@ -43,7 +43,7 @@ public class BookServiceImplementation implements BookService {
     @Override
     public void update(Book book)
             throws BookAlreadyExistsException, BookNotFoundException {
-        if(bookRepository.findByTitle(book.getTitle()).isPresent()){
+        if(bookRepository.findByTitle(book.getTitle()).isPresent() && !bookRepository.findByTitle(book.getTitle()).get().getId().equals(book.getId())){
             throw new BookAlreadyExistsException("The book you want to update already exist.");
         }
         Optional<Book> existingBook = bookRepository.findById(book.getId());
@@ -65,8 +65,8 @@ public class BookServiceImplementation implements BookService {
             throws BookNotFoundException{
         Optional<Book> existingBook = bookRepository.findById(book.getId());
         if(existingBook.isPresent() && existingBook.get().getIsActive().equals(true) && existingBook.get().getStatus().equals("AVAILABLE")) {
-            book.setIsActive(false);
-            bookRepository.save(book);
+            existingBook.get().setIsActive(false);
+            bookRepository.save(existingBook.get());
         }
         else {
             throw new BookNotFoundException("The book you requested not found.");

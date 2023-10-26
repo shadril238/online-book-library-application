@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./detailsSection.component.css";
 import BookDetailImg from "../../../assets/showcase-bg.jpg";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { axiosInstanceBookService } from "../../../utils/axiosInstanceBookService";
 import { ShelfContext, UserContext } from "../../../App";
 
 const DetailsSectionComponent = () => {
   const { id } = useParams();
   const [bookDetails, setBookDetails] = useState();
+  const [bookReviews, setBookReviews] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const user = useContext(UserContext);
@@ -31,6 +32,16 @@ const DetailsSectionComponent = () => {
         setIsLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    axiosInstanceBookService.get(`/${id}/reviews`).then((resp) => {
+      const data = resp.data;
+      console.log("book reviews : ", data);
+      setBookReviews(data);
+    });
+  }, []);
+
+  // console.log(`Book Reviews : ${bookReviews}`);
 
   const handleAddToMyShelf = () => {
     if (user) {
@@ -63,17 +74,45 @@ const DetailsSectionComponent = () => {
               <b>Language</b> : {bookDetails?.language}
             </p>
             <p>
-              <b>Book Length</b> : {bookDetails?.pageLength}
+              <b>Book Page Length</b> : {bookDetails?.pageLength}
             </p>
             <h3>
               <b>Status</b> : {bookDetails?.status}
             </h3>
 
-            <a onClick={handleAddToMyShelf} className="button-primary">
+            <Link onClick={handleAddToMyShelf} className="button-shelf">
               Add to My Shelf
-            </a>
+            </Link>
           </div>
         </div>
+      </div>
+      <h2 className="reviews-container-header">
+        <u>Reviews</u>
+      </h2>
+      <div className="reviews-container">
+        {bookReviews?.map((review) => {
+          console.log("Review ", review?.user?.firstName);
+          return (
+            <div key={review?.id}>
+              <div className="reviews-container-user">
+                <h3>
+                  {/* User :{" "} */}
+                  {review?.user?.firstName + " " + review?.user?.lastName}
+                </h3>
+                <p>
+                  <i>Created at : {review?.date}</i>
+                </p>
+              </div>
+              <div className="reviews-container-review">
+                <h4>Book Rating : {review?.rating}</h4>
+                <p>
+                  <b>Comment : </b>
+                  {review?.review}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

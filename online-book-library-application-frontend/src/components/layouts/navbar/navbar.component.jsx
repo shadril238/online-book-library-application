@@ -68,22 +68,41 @@ const NavbarComponent = ({ darkTheme, darkText }) => {
               >
                 Borrow History
               </Link>
+
+              <Link
+                to="/profile"
+                className={`${darkText ? "nav-links-dark" : "nav-links"}`}
+              >
+                Profile
+              </Link>
             </>
           )}
 
           {token && role === "ADMIN" && (
             <>
               <Link
-                to="/"
+                to="/admin/users"
                 className={`${darkText ? "nav-links-dark" : "nav-links"}`}
               >
-                Home
+                Users
               </Link>
               <Link
-                to="/books"
+                to="/admin/books"
                 className={`${darkText ? "nav-links-dark" : "nav-links"}`}
               >
                 Books
+              </Link>
+              <Link
+                to="/admin/book/add"
+                className={`${darkText ? "nav-links-dark" : "nav-links"}`}
+              >
+                Add Book
+              </Link>
+              <Link
+                to="/admin/profile"
+                className={`${darkText ? "nav-links-dark" : "nav-links"}`}
+              >
+                Profile
               </Link>
             </>
           )}

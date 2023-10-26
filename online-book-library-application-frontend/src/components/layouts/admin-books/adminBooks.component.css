@@ -1,0 +1,17 @@
+.container .button-primary {
+  margin-bottom: 3rem;
+  padding: 1rem 1.6rem;
+  margin-top: -50rem;
+  font-weight: bold;
+  font-size: large;
+}
+
+.product-listing-all-heading {
+  text-align: center;
+  padding-bottom: 5rem;
+  font-size: 3rem;
+}
+
+.product-listing-all-heading .status {
+  font-size: 3.3rem;
+}
