@@ -24,7 +24,7 @@ My aim was to create a comprehensive Online Book Library application, featuring 
 #### 5. Book Reviews and Ratings:
 * **/books/{bookId}/reviews**: Retrieve reviews and ratings for a specific book by bookId.
 * **/books/{bookId}/reviews/create**: Allow users (CUSTOMER) to create a review and rating for a book.
-*** /books/{bookId}/reviews/{reviewId}/update**: Allow users (CUSTOMER) to update their own review and rating for a book.
+* **/books/{bookId}/reviews/{reviewId}/update**: Allow users (CUSTOMER) to update their own review and rating for a book.
 * **/books/{bookId}/reviews/{reviewId}/delete**: Allow users (CUSTOMER) to delete their own review and rating for a book.
 #### 6. User History (Optional):
 * **/users/{userId}/history**: Allow users to view their borrowing history, including borrowed books, due dates, and return dates
