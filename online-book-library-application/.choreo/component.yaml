@@ -2,6 +2,7 @@ schemaVersion: 1.0
 endpoints:
   - name: book-library
     displayName: online-book-library
+    type: http  # Specifies the type of endpoint
     service:
       basePath: /book-library
       port: 8080
